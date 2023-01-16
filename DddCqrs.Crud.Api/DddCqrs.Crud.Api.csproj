@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DddCqrs.Crud.Application\DddCqrs.Crud.Application.csproj" />
+    <ProjectReference Include="..\DddCqrs.Crud.Persistence.Ef\DddCqrs.Crud.Persistence.EventStore.Ef.csproj" />
+    <ProjectReference Include="..\DddCqrs.Crud.Persistence.ReadOnly.Ef\DddCqrs.Crud.Persistence.ReadDomain.Ef.csproj" />
+  </ItemGroup>
+
+</Project>
