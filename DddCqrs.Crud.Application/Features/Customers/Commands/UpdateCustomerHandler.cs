@@ -49,10 +49,7 @@ namespace DddCqrs.Crud.Application.Features.Customers.Commands
 
             _subscriber.Subscribe<CustomerUpdatedEvent>(async @event =>
             {
-                foreach (var handler in _customerUpdatedEventHandlers)
-                {
-                    await handler.HandleAsync(@event);
-                }
+                await EventSubscriber.HandleEnumerableAsync(_customerUpdatedEventHandlers, @event);
             });
 
             customer.Update(command.FirstName, command.LastName, command.PhoneNumber, 

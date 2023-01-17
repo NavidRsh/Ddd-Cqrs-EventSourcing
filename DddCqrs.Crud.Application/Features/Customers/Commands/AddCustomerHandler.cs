@@ -51,10 +51,7 @@ namespace DddCqrs.Crud.Application.Features.Customers.Commands
 
             _subscriber.Subscribe<CustomerCreatedEvent>(async @event =>            
             {
-                foreach (var handler in _customerCreatedEventHandlers)
-                {
-                    await handler.HandleAsync(@event);
-                }
+                await EventSubscriber.HandleEnumerableAsync(_customerCreatedEventHandlers, @event);
             });
 
             await _customerEventStoreRepository.SaveAsync(customer);

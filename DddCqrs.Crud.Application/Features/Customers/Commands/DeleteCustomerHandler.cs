@@ -31,10 +31,7 @@ namespace DddCqrs.Crud.Application.Features.Customers.Commands
 
             _subscriber.Subscribe<CustomerDeletedEvent>(async @event =>
             {
-                foreach (var handler in _customerDeletedEventHandlers)
-                {
-                    await handler.HandleAsync(@event);
-                }
+                await EventSubscriber.HandleEnumerableAsync(_customerDeletedEventHandlers, @event);
             });
 
             customer.Delete();
