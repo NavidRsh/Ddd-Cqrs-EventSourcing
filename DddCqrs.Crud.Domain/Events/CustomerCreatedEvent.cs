@@ -16,7 +16,7 @@
         }
 
         internal CustomerCreatedEvent(CustomerId aggregateId, long aggregateVersion, string firstName, string lastName,
-            ulong phoneNumber, DateTime dateOfBirth, string email, string bankAccountNumber) : base(aggregateId)
+            PhoneNumberValue phoneNumber, DateTime dateOfBirth, string email, string bankAccountNumber) : base(aggregateId)
         {
             CustomerId = aggregateId;
             Firstname = firstName;
@@ -31,7 +31,7 @@
         public string Firstname { get; private set; }
         public string Lastname { get; }
         public DateTime DateOfBirth { get; }
-        public ulong PhoneNumber { get; }
+        public PhoneNumberValue PhoneNumber { get; }
         public string Email { get; }
         public string BankAccountNumber { get; }        
 

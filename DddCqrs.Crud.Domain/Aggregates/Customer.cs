@@ -19,7 +19,7 @@
         {
             Id = new CustomerId(customerId.Id.ToString());
         }
-        public Customer(CustomerId customerId, string firstname, string lastname, ulong phoneNumber, DateTime dateOfBirth, string email, string bankAccountNumber)
+        public Customer(CustomerId customerId, string firstname, string lastname, string phoneNumber, DateTime dateOfBirth, string email, string bankAccountNumber)
         {
             if (customerId == null)
             {
@@ -28,36 +28,29 @@
 
             if (string.IsNullOrEmpty(firstname))
             {
-                throw new ArgumentNullException("First Name should not be empty!"); 
+                throw new ArgumentNullException("First Name should not be empty!");
             }
 
             if (string.IsNullOrEmpty(lastname))
             {
-                throw new ArgumentException("Last Name should not be empty!"); 
+                throw new ArgumentException("Last Name should not be empty!");
             }
 
-            RaiseEvent(new CustomerCreatedEvent(customerId, Version, firstname, lastname, phoneNumber, dateOfBirth, email, bankAccountNumber));
+            RaiseEvent(new CustomerCreatedEvent(customerId, Version, firstname, lastname, PhoneNumberValue.Create(phoneNumber), dateOfBirth, email, bankAccountNumber));
         }
 
         public string Firstname { get; private set; }
         public string Lastname { get; private set; }
         public DateTime DateOfBirth { get; private set; }
-
-        /// <summary>
-        /// I chose ulong over varchar since ulong takes 8 bytes 
-        /// but varchar takes 1 for each character plus two for overhead 
-        /// (usually phone numbers should be stored as string since there is 
-        /// formatting and some non-numeral characters but here storage takes priority)
-        /// </summary>
-        public ulong PhoneNumber { get; private set; }
+        public PhoneNumberValue PhoneNumber { get; private set; }
         public string Email { get; private set; }
         public string BankAccountNumber { get; private set; }
 
         public bool Activated { get; private set; }
 
-        public void Update(string firstname, string lastname, ulong phoneNumber, DateTime dateOfBirth, string email, string bankAccountNumber)
+        public void Update(string firstname, string lastname, string phoneNumber, DateTime dateOfBirth, string email, string bankAccountNumber)
         {
-            RaiseEvent(new CustomerUpdatedEvent(Id, Version, firstname, lastname, phoneNumber, 
+            RaiseEvent(new CustomerUpdatedEvent(Id, Version, firstname, lastname, PhoneNumberValue.Create(phoneNumber),
                 dateOfBirth, email, bankAccountNumber));
         }
 
