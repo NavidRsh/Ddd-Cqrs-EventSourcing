@@ -14,7 +14,7 @@ namespace DddCqrs.Crud.Application.Features.Customers.Commands
 
         public DateTime DateOfBirth { get; init; }
 
-        public ulong PhoneNumber { get; init; }
+        public string PhoneNumber { get; init; }
 
         public string Email { get; init; }
 

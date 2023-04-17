@@ -6,7 +6,7 @@
 
     public interface ICustomerValidations
     {
-        bool IsValidPhoneNumber(ulong phoneNumber);
+        bool IsValidPhoneNumber(string phoneNumber);
 
         bool IsValidMail(string email);
 
@@ -15,7 +15,7 @@
 
     public class CustomerValidations : ICustomerValidations
     {
-        public bool IsValidPhoneNumber(ulong phoneNumber)
+        public bool IsValidPhoneNumber(string phoneNumber)
         {
             try
             {

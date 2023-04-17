@@ -24,14 +24,14 @@ namespace DddCqrs.Crud.Application.Services.EventHandlers
         public async Task HandleAsync(CustomerCreatedEvent @event)
         {
             await _customerRepository.InsertAsync(CustomerReadEntity.Create(@event.CustomerId.IdAsString(), 
-                @event.Firstname, @event.Lastname, @event.DateOfBirth, @event.PhoneNumber, @event.Email, @event.BankAccountNumber));
+                @event.Firstname, @event.Lastname, @event.DateOfBirth, @event.PhoneNumber.PhoneNumber, @event.Email, @event.BankAccountNumber));
         }
 
         public async Task HandleAsync(CustomerUpdatedEvent @event)
         {
             var customer = await _customerRepository.GetByIdAsync(@event.CustomerId.IdAsString());
 
-            customer.Update(@event.Firstname, @event.Lastname, @event.PhoneNumber, @event.DateOfBirth,
+            customer.Update(@event.Firstname, @event.Lastname, @event.PhoneNumber.PhoneNumber, @event.DateOfBirth,
                 @event.Email, @event.BankAccountNumber);
 
             await _customerRepository.UpdateAsync(customer); 
